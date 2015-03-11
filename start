@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Handle ssh configuration
+mkdir -p /root/.ssh
+if [ -e /ssh_config ] ; then
+    cp /ssh_config /root/.ssh/config
+fi
+
+if [ -e /known_hosts ] ; then
+    cp /known_hosts /root/.ssh/
+fi
+
+if [ -e /id_rsa ] ; then
+    cp /id_rsa /root/.ssh/
+fi
+
+chown -R root:root /root/.ssh
+chmod -R u=rwX,g=,o= /root/.ssh
+
+exec /usr/local/bin/attic "$@"

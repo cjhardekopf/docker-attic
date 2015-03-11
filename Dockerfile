@@ -15,5 +15,9 @@ RUN pip3 install --upgrade --requirement /opt/requirements.txt
 # Install attic
 RUN pip3 install attic
 
+# Add the start script
+ADD start /opt/
+
 # Set the ENTRYPOINT
-ENTRYPOINT [ "/usr/local/bin/attic" ]
+ENTRYPOINT [ "/opt/start" ]
+##CMD [ "/opt/start" ]
