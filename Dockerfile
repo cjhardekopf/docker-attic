@@ -5,7 +5,8 @@ MAINTAINER Chris Hardekopf <cjh@ygdrasill.com>
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
         python3 python3-pip libssl-dev libacl1-dev \
-        openssh-client pkg-config libfuse-dev && \
+        openssh-client pkg-config libfuse-dev \
+        sshfs && \
     rm -rf /var/lib/apt/lists/*
 
 # Install the python requirements
