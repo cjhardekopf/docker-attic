@@ -17,7 +17,7 @@ fi
 chown -R root:root /root/.ssh
 chmod -R u=rwX,g=,o= /root/.ssh
 
-if [ -n "SSHFS" ] ; then
+if [ -n "$SSHFS" ] ; then
     mkdir -p /sshfs
     if ! sshfs "$SSHFS" /sshfs ; then
         echo "Failed to mount sshfs: $SSHFS" >&2
