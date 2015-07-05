@@ -19,7 +19,19 @@ chmod -R u=rwX,g=,o= /root/.ssh
 
 if [ -n "$SSHFS" ] ; then
     mkdir -p /sshfs
-    if ! sshfs "$SSHFS" /sshfs ; then
+
+    sshfscmd=("/usr/bin/sshfs" "$SSHFS" /sshfs)
+    if [ -n "SSHFAST" ] ; then
+        sshfscmd+=(-o "Ciphers=arcfour")
+    fi
+
+    if [ -n "$SSHOPTS"] ; then
+        for opt in $SSHOPTS ; do
+            sshfscmd+=(-o "$opt")
+        done
+    fi
+
+    if ! "${sshfscmd[@]}" ; then
         echo "Failed to mount sshfs: $SSHFS" >&2
         exit 1
     fi
