@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Make sure that the locale is set up if specified
+if [ -n "$LANG" ] ; then
+    locale-gen "$LANG"
+fi
+
+if [ -n "$LC_ALL" ] && [ "$LC_ALL" != "$LANG" ] ; then
+    locale-gen "$LC_ALL"
+fi
+
 # Handle ssh configuration
 mkdir -p /root/.ssh
 if [ -e /ssh_config ] ; then
